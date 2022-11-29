@@ -24,29 +24,24 @@ function Tasks({ message, setArray, fetchData }) {
   const [Text, Changetext] = useState("");
   const [Uptade, SetUptade] = useState(false);
   const [id, SetId] = useState(0);
-  // const [show, setShow] = useState(); // to show textfield disabled
   const [check, setCheck] = useState(false);
-  const [number,setnumber]=useState()
 
-useEffect(() => {
-  
-   
- }, [setArray])
- 
+
+  useEffect(() => {}, [setArray]);
+
   const handleChnage1 = (e) => {
     Changetext(e.target.value);
   };
 
   const delData = async (id) => {
     let x = await del(id);
-    setArray(prev => prev = [...x.data.data]);
+    setArray((prev) => (prev = [...x.data.data]));
     // console.log("my x", x)
     await fetchData();
-   
   };
   const uptadeData = async (id) => {
     let x = await update(id, Text);
-    console.log("what is", x.data.data)
+    console.log("what is", x.data.data);
     setArray([x.data.data]);
     await fetchData();
   };
@@ -54,96 +49,90 @@ useEffect(() => {
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  }
+  };
 
   return (
-      
-
+  
     <div className="container">
       <div className="inner_container">
-
-      {message &&
-        message?.map((item, index) => {
-          return (
-            <div className="items" key={index}>
-              <Accordion   expanded={expanded === `panel${index}` } onChange={handleChange(`panel${index}`)}>
-                {Uptade && item._id === id && (
-                  <TextField
-                  id="outlined-required"
-                  placeholder="entet tasks"
-                  type="text"
-                  name="message1"
-                  onChange={handleChnage1}
-                  defaultValue={item.task}                 
-                  />
-                  )}
-                <AccordionSummary
-                         expandIcon={<ExpandMoreIcon />}
-                         aria-controls="panel1bh-content"
-                         id="panel1bh-header"
-                         onClick={()=>{
-                          SetUptade(false);
-                        }}
-                  >
-                  {!Uptade && (
+        {message &&
+          message?.map((item, index) => {
+            return (
+              <div className="items" key={index}>
+                <Accordion
+                  expanded={expanded === `panel${index}`}
+                  onChange={handleChange(`panel${index}`)}
+                >
+                  {Uptade && item._id === id && (
                     <TextField
-                    value={item.task}
-                    type="text"
-                    disabled={true}
+                      id="outlined-required"
+                      placeholder="entet tasks"
+                      type="text"
+                      name="message1"
+                      onChange={handleChnage1}
+                      defaultValue={item.task}
                     />
+                  )}
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                    onClick={() => {
+                      SetUptade(false);
+                    }}
+                  >
+                    {!Uptade && (
+                      <TextField
+                        value={item.task}
+                        type="text"
+                        disabled={true}
+                      />
                     )}
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography  className="typo">
-                    <Button
-                      onClick={(e) => {
-                        console.log(item._id,"aaaaa")
-                        delData(item._id);
-                        
-                      }}
-                      variant="outlined"
-                      startIcon={<DeleteIcon />}
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography className="typo">
+                      <Button
+                        onClick={(e) => {
+                          console.log(item._id, "aaaaa");
+                          delData(item._id);
+                        }}
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
                       >
-                      DEL
-                    </Button>
-                    <Button
-                      onClick={(e) => {
-                        SetUptade(true);
-                        // uptadeData(item._id);
-                        SetId(item._id);
-                        // setShow(true);
-                      }}
-                      variant="outlined"
-                      startIcon={<EditIcon />}
+                        DEL
+                      </Button>
+                      <Button
+                        onClick={(e) => {
+                          SetUptade(true);
+                          // uptadeData(item._id);
+                          SetId(item._id);
+                          // setShow(true);
+                        }}
+                        variant="outlined"
+                        startIcon={<EditIcon />}
                       >
-                      Edit
-                    </Button>
+                        Edit
+                      </Button>
 
-                    {Uptade && (
-                      <CheckIcon
-                      onClick={() => {
-                        SetUptade(false);
-                        uptadeData(item._id);
-                        setCheck(true);
-                        
-                        
-                        // setArrays(true);
-                        
-                        // value(item.task);
-                      }}
-                      >
-                        UPTADE
-                      </CheckIcon>
-                    )}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-          );
-        })}
-        </div>
+                      {Uptade && (
+                        <CheckIcon
+                          onClick={() => {
+                            SetUptade(false);
+                            uptadeData(item._id);
+                            setCheck(true);
+                          }}
+                        >
+                          UPTADE
+                        </CheckIcon>
+                      )}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            );
+          })}
+      </div>
     </div>
-    
   );
 }
 export default Tasks;
