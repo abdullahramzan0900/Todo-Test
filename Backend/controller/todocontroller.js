@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
 const Todo = require("../module/todoModel");
-const { exists } = require("../module/todoModel"); 
+const { exists } = require("../module/todoModel");
 exports.createtask = asyncHandler(async (req, res) => {
   const { task, active } = req.body;
   const todo = await Todo.create({ task, active });
@@ -13,7 +13,7 @@ exports.createtask = asyncHandler(async (req, res) => {
 });
 //uptade
 exports.updateTask = asyncHandler(async (req, res) => {
-    console.log("ss", req.body);
+  console.log("ss", req.body);
   const { task, active } = req.body;
   // const exittask=await Todo.findOne ({_id:req.params.id})
   const existtask = await Todo.findOne({ _id: req.params.id });
@@ -38,7 +38,7 @@ exports.updateTask = asyncHandler(async (req, res) => {
 exports.delTask = asyncHandler(async (req, res) => {
   const { task, active } = req.body;
   // const exittask=await Todo.findOne ({_id:req.params.id})
-  
+
   const existtask = await Todo.findOne({ _id: req.params.id });
   if (existtask) {
     await existtask.remove();

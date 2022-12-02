@@ -18,6 +18,7 @@ import { del } from "../services/todoApi";
 import { update } from "../services/todoApi";
 import { Data } from "../services/todoApi";
 
+
 function Tasks({ message, setArray, fetchData }) {
   console.log("ancc", message);
 
@@ -122,7 +123,7 @@ function Tasks({ message, setArray, fetchData }) {
                             setCheck(true);
                           }}
                         >
-                          UPTADE
+                      UPTADE
                         </CheckIcon>
                       )}
                     </Typography>
